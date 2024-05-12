@@ -1,3 +1,27 @@
+#include <iostream>
+using namespace std;
+struct rectangle {
+double length;
+double width;
+
+   double calculateArea(){
+        return length * width;
+   }
+   double calculatePerimeter(){
+        return 2*(length+width);
+   }
+};
+int main(){
+    rectangle ret;
+    ret.length =4.5;
+    ret.width = 3.2;
+    cout<<ret.calculateArea();
+    return 0;
+}
+
+
+--------------------------------------
+
 Write a C++ program using hybrid inheritance to create a base class 
 called Person with common attributes, derive two classes Student and 
 Employee from it, and create a class Manager that inherits from both 
