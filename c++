@@ -29,7 +29,70 @@ Student and Employee, representing a person who is both a student
 and an employee?______________________________________
 
 
+#include <iostream>
+#include <string>
 
+using namespace std;
+
+class Person {
+protected:
+    string name;
+    int age;
+
+public:
+    Person(string _name, int _age) : name(_name), age(_age) {}
+
+    void displayInfo() {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+    }
+};
+
+class Student : public Person {
+protected:
+    int studentId;
+
+public:
+    Student(string _name, int _age, int _studentId) : Person(_name, _age), studentId(_studentId) {}
+
+    void displayInfo() {
+        Person::displayInfo();
+        cout << "Student ID: " << studentId << endl;
+    }
+};
+
+class Employee : public Person {
+protected:
+    string companyId;
+
+public:
+    Employee(string _name, int _age, string _companyId) : Person(_name, _age), companyId(_companyId) {}
+
+    void displayInfo() {
+        Person::displayInfo();
+        cout << "Company ID: " << companyId << endl;
+    }
+};
+
+class Manager : public Student, public Employee {
+public:
+    Manager(string _name, int _age, int _studentId, string _companyId)
+        : Student(_name, _age, _studentId), Employee(_name, _age, _companyId) {}
+
+    void displayInfo() {
+        Student::displayInfo();
+        Employee::displayInfo();
+    }
+};
+
+int main() {
+    Manager manager("Mohamed", 21, 10, "CC");
+
+    cout << "Manager Information:" << endl;
+    manager.displayInfo();
+
+    return 0;
+}
 
 
 
