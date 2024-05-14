@@ -1,36 +1,53 @@
-//Example: Find IP address for domain name.
-
-import java.net.*;
+// sh3
+//Example 1: retrieve data programmatically using sockets (website on port 13).
+import java.io.*;
+import java.net.*; 
 import java.util.*;
 public class App {
 public static void main(String[] args) throws Exception {
-{
-String host;
-Scanner input = new Scanner(System.in);
-System.out.print("\n\nEnter host name: ");
-host = input.next();
+// String hostname = "localhost"; //java.net.ConnectException: Connection 
+refused: connect
+String hostname = "https://translate.google.com.eg/";
+Socket socket = null;
 try {
-InetAddress address =
-InetAddress.getByName(host);
-System.out.println(("\n IP address: "
-+ address.toString());
+socket = new Socket(hostname, 13);
+// read from the socket...
+} 
+catch (IOException ex) {
+System.out.println("Error2:");
+System.err.println(ex);
+} 
+finally {
+if (socket != null) {
+try {
+socket.close();
+} 
+catch (IOException ex) {
+System.out.println("Error2:");
+System.err.println(ex);}
 }
-catch (UnknownHostException uhEx)
-{
-System.out.println("Could not find " + host);
-} }}}
-Example 2: Get the IP address of the current machine.
-import java.net.*;
-public class App
-{
-public static void main(String[] args)
-{
+}
+
+//Check a connection with a website then apply some methods.
+import java.io.*;
+import java.net.*; 
+import java.util.*;
+public class App {
+public static void main(String[] args) throws Exception {
 try {
-InetAddress address = InetAddress.getLocalHost();
-System.out.println(address); }
-catch (UnknownHostException uhEx)
-{
-System.out.println("Could not find local address!"); } } }
+Socket toOReilly = new Socket("www.oreilly.com", 80);
+// send and receive data...
+System.out.println("IP:"+ toOReilly.getInetAddress()) ;
+System.out.println("local port:"+ toOReilly.getLocalPort()) ;
+System.out.println("Port:"+ toOReilly.getPort()) ;
+System.out.println("InputStream:"+ toOReilly.getInputStream()) ;
+System.out.println("OutStream:"+ toOReilly.getOutputStream()) ;
+} catch (UnknownHostException ex) {
+System.err.println(ex);
+} catch (IOException ex) {
+System.err.println(ex);
+}
+} }
 
 ----------------------------------------------------------------------
 
@@ -72,7 +89,7 @@ e.getMessage());
 }
 
 ----------------------------------------------------------------------
-
+// sh6
 //A simple client-server communication setup using sockets.
 import java.io.*;
 import java.net.*; 
@@ -103,6 +120,7 @@ s.close();
 }
 
 ---------------------------------------------------------------
+// sh 8
 //Example of a simple UDP client and server implemented in Java:
 UDP Client Example:
 import java.io.*;
@@ -162,7 +180,7 @@ sendData.length, clientAddress, clientPort);
 }
 
 --------------------------------------------------------------
-
+// sh 9
 //Example: Implementing a Simple DHCP Client
 import java.io.*;
 import java.net.*;
